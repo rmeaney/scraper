@@ -1,12 +1,5 @@
-/* Scrape and Display
- * (If you can do this, you should be set for your hw)
- * ================================================== */
-
-// STUDENTS:
-// Please complete the routes with TODOs inside.
-// Your specific instructions lie there
-
-// Good luck!
+/* Showing Mongoose's "Populated" Method
+ * =============================================== */
 
 // Dependencies
 var express = require("express");
@@ -93,63 +86,67 @@ app.get("/scrape", function(req, res) {
 
 // This will get the articles we scraped from the mongoDB
 app.get("/articles", function(req, res) {
-  Article.find({})
-  //.populate("scrape")
-  //.exec((err, done) => res.send(err || done));
-
-  // TODO: Finish the route so it grabs all of the articles
-  .exec()
-  .catch(err => console.log(err))
-  .then(doc => res.json(doc));
-
-
+  // Grab every doc in the Articles array
+  Article.find({}, function(error, doc) {
+    // Log any errors
+    if (error) {
+      console.log(error);
+    }
+    // Or send the doc to the browser as a json object
+    else {
+      res.json(doc);
+    }
+  });
 });
 
-// This will grab an article by it's ObjectId
+// Grab an article by it's ObjectId
 app.get("/articles/:id", function(req, res) {
-
-
-  // TODO
-  // ====
-
-  // Finish the route so it finds one article using the req.params.id,
-
-  // and run the populate method with "note",
-
-  // then responds with the article with the note included
-Article.findOne({ "_id": req.params.id})
+  // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
+  Article.findOne({ "_id": req.params.id })
+  // ..and populate all of the notes associated with it
   .populate("note")
-  .exec()
-  .catch(err => console.log(err))
-  .then(doc => res.json(doc));
-
-
-
-
+  // now, execute our query
+  .exec(function(error, doc) {
+    // Log any errors
+    if (error) {
+      console.log(error);
+    }
+    // Otherwise, send the doc to the browser as a json object
+    else {
+      res.json(doc);
+    }
+  });
 });
+
 
 // Create a new note or replace an existing note
 app.post("/articles/:id", function(req, res) {
+  // Create a new note and pass the req.body to the entry
+  var newNote = new Note(req.body);
 
-
-  // TODO
-  // ====
-
-  // save the new note that gets posted to the Notes collection
-
-  // then find an article from the req.params.id
-
-  // and update it's "note" property with the _id of the new note
-const newNote = new Note(req.body);
-  newNote.save()
-    .catch(err => console.log(err))
-    .then(doc =>) {
-      Article.findOneAndUpdate({"_id": req.params.id}, {"note": doc._id})
-      .exec()
-      .catch(err => console.log(err))
-      .then(doc => res.send(doc));
+  // And save the new note the db
+  newNote.save(function(error, doc) {
+    // Log any errors
+    if (error) {
+      console.log(error);
     }
-
+    // Otherwise
+    else {
+      // Use the article id to find and update it's note
+      Article.findOneAndUpdate({ "_id": req.params.id }, { "note": doc._id })
+      // Execute the above query
+      .exec(function(err, doc) {
+        // Log any errors
+        if (err) {
+          console.log(err);
+        }
+        else {
+          // Or send the document to the browser
+          res.send(doc);
+        }
+      });
+    }
+  });
 });
 
 
