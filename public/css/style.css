@@ -1,0 +1,26 @@
+.navbar-default {
+    background-color: black;
+    font-family:times;
+    color:white;
+    border:0px;
+    border-radius:0px;
+    margin:0px;
+
+}
+  .navbar-default .navbar-nav > li > a {
+   color: white; /*Change active text color here*/
+   font-weight:bold;
+   border:0px;
+    }
+   .navbar-default .navbar-brand {
+    color: white;
+}
+.jumbotron{
+
+	background-image: url("http://citiesintime.ca/media/toronto/downtown/printers-dem/Printers-Strike-Slideshow02-sm.jpg");
+	 background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+	color:white;
+	text-shadow:2px 1px black;
+}
