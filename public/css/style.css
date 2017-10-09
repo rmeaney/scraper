@@ -22,5 +22,10 @@
     background-repeat: no-repeat;
     background-size: cover;
 	color:white;
+  height: 500px;
 	text-shadow:2px 1px black;
 }
+a{
+  color:orange;
+}
+

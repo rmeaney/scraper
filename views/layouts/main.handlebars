@@ -1,15 +1,50 @@
-//grab the articles as JSON
-$.getJSON("/articles", function(data) {
-// for each one
-	for(var i =0; i < data.length; i++){
-		$("#titleinput").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
-	}
-});
+<html>
+	<head>
+		<title>NY Times Scraper</title>
+		<meta charset="utf-8">
 
-$(document).ready(function(){
-      //$('.parallax').parallax();
+		 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+		 <link rel ="stylesheet" type="text/css" href = "css/style.css">
+		 
+	</head>
+	<body>
+		<nav class="navbar navbar-default">
+		  <div class="container-fluid">
+		    <ul class="nav navbar-nav">
+          <li><a href ="/">NY Times Scraper
+		      <li><a href="/scrape">Scrape</a></li>
+		      <li><a href="/saved">Saved</a></li>
+		      <!--<li><a href="/articles">Articles</a></li>-->
+		    </ul>
+		  </div>
+		</nav>
+		<div class="jumbotron jumbotron-fluid">
+		  <div class="container valign-wrapper">
+		    <h1 class="display-3">New York Times News Scraper</h1>
+        <br/>
+		    <p class="lead">Fresh stories scraped.</p>
+		  </div>
+		</div>
+		<h1>NY Times Scraper</h1>
+		
+		{{{body}}}
+
+    <div id="modal1" class="modal">
+      <div class="modal-content">
+        <div id="notes">
+
+        </div>
+      </div>
+    </div>
+
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+		 integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+		 crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+		 <script type="text/javascript">
+    $(document).ready(function(){
       $('.modal').modal();
-  });
+    });
 
     $(document).on("click", "#saveItem", function() {
       // Grab the id associated with the article from the submit button
@@ -89,3 +124,7 @@ $(document).ready(function(){
       $("#titleinput").val("");
       $("#bodyinput").val("");
     });
+
+  </script>
+	</body>
+</html>

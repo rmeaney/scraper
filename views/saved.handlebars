@@ -1,0 +1,17 @@
+<div class="flexContainer">
+
+
+
+{{#each content}}
+    <div class="card blue darken-1">
+      <div class="card-content white-text">
+        <span class="card-title">{{this.title}}</span>
+        <a href="{{this.link}}">Link to Item</a>
+      </div>
+      <div class="card-action">
+        <a class="modal-trigger" id="writeNote" data-target="modal1" data-id="{{this._id}}">Write a Note</a>
+      </div>
+    </div>
+{{/each}}
+
+</div>

@@ -1,0 +1,17 @@
+<div class="flexContainer">
+
+
+
+{{#each content}}
+    <div class="card blue">
+      <div class="card-content white-text">
+        <span class="card-title">{{this.title}}</span>
+        <a href="{{this.link}}">Link to Item</a>
+      </div>
+      <div class="card-action">
+        <a id="saveItem" data-id="{{this._id}}">Save For Later</a>
+      </div>
+    </div>
+{{/each}}
+
+</div>
